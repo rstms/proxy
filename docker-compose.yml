@@ -1,0 +1,24 @@
+version: '3'
+services:
+  proxy:
+    build:
+      context: ./proxy
+      args: 
+        ssh_key:
+        ssh_host:
+        ssh_forward:
+    restart: unless-stopped
+    networks:
+      - internal
+
+  nginx:
+    build: 
+      context: ./nginx
+    ports: 
+      - "80"
+    restart: unless-stopped
+    networks:
+      - internal
+
+networks:
+  internal:
